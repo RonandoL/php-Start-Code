@@ -28,6 +28,18 @@
             $result = Task::getAll();
             $this->assertEquals($test_task, $result[0]);
         }
+        
+        function test_getAll()
+        {
+            //Arrange
+            ...
+        
+            //Act
+            ...
+        
+            //Assert
+            ...
+        }
     }
 
     // Run in terminal in project folder

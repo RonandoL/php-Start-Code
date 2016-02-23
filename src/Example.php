@@ -16,12 +16,19 @@
         
         static function getAll()
         {
-            return $_SESSION['list_of_contacts'];
+            $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks;");
+            $tasks = array();
+            foreach($returned_tasks as $task) {
+                $description = $task['description'];
+                $new_task = new Task($description);
+                array_push($tasks, $new_task);
+            }
+            return $tasks;
         }
         
         static function deleteAll()
         {
-            $_SESSION['list_of_contacts'] = array();
+            $GLOBALS['DB']->exec("DELETE FROM tasks;");
         }
     }
 ?>

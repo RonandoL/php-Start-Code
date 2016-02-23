@@ -1,21 +1,32 @@
 <?php
 
+    /**
+    * @backupGlobals disabled
+    * @backupStaticAttributes disabled
+    */
+    
     require_once "src/Example.php";
+    
+    $server = 'mysql:host=localhost;dbname=to_do_test';
+    $username = 'root';
+    $password = 'root';
+    $DB = new PDO($server, $username, $password);
 
     class ExampleTest extends PHPUnit_Framework_TestCase
     {
 
-        function test_makeExample_oneWord()
+        function test_save()
         {
             //Arrange
-            $test_Example = new Example;
-            $input = "beowulf";
+            $description = "Wash the dog";
+            $test_task = new Task($description);
 
             //Act
-            $result = $test_Example->makeExample($input);
+            $test_task->save();
 
             //Assert
-            $this->assertEquals("Beowulf", $result);
+            $result = Task::getAll();
+            $this->assertEquals($test_task, $result[0]);
         }
     }
 
